@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "SmartcarMqttController";
     private static final String EXTERNAL_MQTT_BROKER = "aerostun.dev";
     private static final String LOCALHOST = "10.0.2.2";
-    private static final String MQTT_SERVER = "tcp://" + EXTERNAL_MQTT_BROKER + ":1883"; //Coonnect local
+    private static final String MQTT_SERVER = "tcp://" + LOCALHOST + ":1883"; //Coonnect local
     private static final String THROTTLE_CONTROL = "/smartcar/control/throttle";
     private static final String STEERING_CONTROL = "/smartcar/control/steering";
     private static final int MOVEMENT_SPEED = 70;
@@ -137,23 +137,28 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goingForward(View view){
-        int speed = 50;
+        int speed = 80;
         mMqttClient.publish("smartcar/forward", Integer.toString(speed), 1, null);
     }
 
     public void goingLeft(View view){
-        //code for it!!
-
+        int leftAngle = -60;
+        mMqttClient.publish("smartcar/left", Integer.toString(leftAngle), 1, null);
     }
-    public void goingBack(View view){
 
+    public void goingBack(View view){
+        int backSpeed = -80;
+        mMqttClient.publish("smartcar/backward", Integer.toString(backSpeed),1, null );
     }
 
     public void goingRight(View view){
-
+        int rightAngle = 60;
+        mMqttClient.publish("smartcar/right", Integer.toString(rightAngle), 1, null);
     }
-    public void goingStop(View view){
 
+    public void goingStop(View view){
+        int stop = 0;
+        mMqttClient.publish("smartcar/stop", Integer.toString(stop), 1, null);
     }
 
 }
